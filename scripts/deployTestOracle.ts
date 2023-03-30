@@ -4,12 +4,15 @@ import { TestOracle__factory } from "../typechain-types/factories/TestOracle__fa
 
 export const main = async () => {
   const [owner] = await hre.ethers.getSigners();
+  const addressList = await addressUtils.getAddressList(hre.network.name);
 
   const testOracle = (await hre.ethers.getContractFactory(
     "TestOracle"
   )) as TestOracle__factory;
 
-  const testOracleContract = await testOracle.connect(owner).deploy();
+  const testOracleContract = await testOracle
+    .connect(owner)
+    .deploy(addressList["SlidingWindowOracle"], addressList["KUSDT"]);
 
   await testOracleContract.deployTransaction
     .wait()

@@ -12,11 +12,17 @@ async function main() {
   );
 
   await (
-    await TestOracle.setAggregatorAddr("BTC", addressList["BTC/USDT"])
+    await TestOracle.setAggregatorAddr(
+      addressList["KKUB"],
+      addressList["KUB/USDT"]
+    )
   ).wait();
 
   await (
-    await TestOracle.setAggregatorAddr("ETH", addressList["ETH/USDT"])
+    await TestOracle.setAggregatorAddr(
+      addressList["KUSDC"],
+      addressList["USDC/USDT"]
+    )
   ).wait();
 }
 

@@ -27,28 +27,26 @@ async function main() {
     owner
   );
 
-  //convert KUB to KKUB
-  // await (
-  //   await owner.sendTransaction({
-  //     to: addressList["KKUB"],
-  //     value: ethers.utils.parseEther("10"),
-  //   })
-  // ).wait();
+  await (
+    await owner.sendTransaction({
+      to: addressList["KKUB"],
+      value: ethers.utils.parseEther("10"),
+    })
+  ).wait();
 
   // const balance = await KKUB.balanceOf(owner.address);
-  // console.log(ethers.utils.formatEther(balance));
 
-  // await KKUB.approve(
-  //   addressList["DataFeedSubscription"],
-  //   ethers.constants.MaxUint256
-  // ).then((tx) => tx.wait());
+  await KKUB.approve(
+    addressList["DataFeedSubscription"],
+    ethers.constants.MaxUint256
+  ).then((tx) => tx.wait());
 
-  // await (await DataFeedSubscription["subscribe(uint256)"](1)).wait();
+  await (await DataFeedSubscription["subscribe(uint256)"](1)).wait();
 
   const tokenIds = await BitkubDataFeedNFT.tokenOfOwnerAll(owner.address);
 
   await PermissionManager["addAddresses(uint256,address[])"](
-    tokenIds[0].toString(),
+    tokenIds[tokenIds.length - 1].toString(),
     [addressList["TestOracle"]]
   );
 }
